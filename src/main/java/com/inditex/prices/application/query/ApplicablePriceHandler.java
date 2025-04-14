@@ -1,14 +1,16 @@
 package com.inditex.prices.application.query;
 
 import com.inditex.prices.domain.model.entities.Price;
-import com.inditex.prices.domain.repository.PriceQueryRepository;
+import com.inditex.prices.domain.ports.out.repository.PriceQueryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Component
 public class ApplicablePriceHandler {
 
     private final PriceQueryRepository priceQueryRepository;

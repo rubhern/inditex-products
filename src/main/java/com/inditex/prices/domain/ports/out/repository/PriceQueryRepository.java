@@ -1,4 +1,4 @@
-package com.inditex.prices.domain.repository;
+package com.inditex.prices.domain.ports.out.repository;
 
 import com.inditex.prices.domain.model.entities.Price;
 
