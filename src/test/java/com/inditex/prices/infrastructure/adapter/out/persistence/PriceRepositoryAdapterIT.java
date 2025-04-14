@@ -1,7 +1,7 @@
 package com.inditex.prices.infrastructure.adapter.out.persistence;
 
 import com.inditex.prices.domain.model.entities.Price;
-import com.inditex.prices.domain.repository.PriceQueryRepository;
+import com.inditex.prices.domain.ports.out.repository.PriceQueryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
