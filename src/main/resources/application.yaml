@@ -1,7 +1,29 @@
+#Spring configuration
 spring:
   application:
-    name: products
-
+    name: prices
+  # Sql initialization configuration
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/schema.sql
+      data-locations: classpath:sql/data.sql
+  datasource:
+    url: jdbc:h2:mem:pricesdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+#Server configuration
+Server:
+    port: 8001
+# Health check configuration
 management:
   endpoints:
     web:
@@ -19,10 +41,11 @@ management:
       enabled: true
     ping:
       enabled: true
+  # Actuator Info configuration
   info:
     env:
       enabled: true
-
+# Info configuration
 info:
   app:
     environment: production
