@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Price API
+  description: API to retrieve the applicable price for a given product, brand, and date.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8001
+    description: Local server
+
+paths:
+  /prices:
+    get:
+      summary: Get applicable price
+      description: Returns the applicable price based on brand, product, and application date.
+      operationId: getApplicablePrice
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: applicationDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Applicable price found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '404':
+          description: No applicable price found
+        '400':
+          description: Invalid input parameters
+
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        priceList:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: decimal
+        currency:
+          type: string
+          example: EUR

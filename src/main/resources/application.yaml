@@ -49,3 +49,11 @@ management:
 info:
   app:
     environment: production
+# OpenAPI  configuration
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /openapi/prices-api.yaml
