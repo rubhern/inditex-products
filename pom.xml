@@ -123,18 +123,48 @@
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.12.0</version>
-                <configuration>
-                    <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
-                    <generatorName>spring</generatorName>
-                    <output>${project.build.directory}/generated-sources</output>
-                    <apiPackage>com.inditex.api</apiPackage>
-                    <modelPackage>com.inditex.model</modelPackage>
-                    <configOptions>
-                        <interfaceOnly>true</interfaceOnly>
-                        <useTags>true</useTags>
-                        <dateLibrary>java8</dateLibrary>
-                    </configOptions>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/static/openapi/prices-api.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+                            <apiPackage>com.inditex.prices.infrastructure.adapter.in.rest.api</apiPackage>
+                            <modelPackage>com.inditex.prices.infrastructure.adapter.in.rest.dto</modelPackage>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useTags>true</useTags>
+                                <dateLibrary>java8</dateLibrary>
+                                <openApiNullable>false</openApiNullable>
+                                <useSpringBoot3>true</useSpringBoot3>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/openapi
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
