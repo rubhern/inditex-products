@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "a5b87e98-199b-4bd7-8047-13cc80277943",
+		"name": "Prices Acceptance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43899412",
+		"_collection_link": "https://ruben-3176818.postman.co/workspace/Ruben's-Workspace~6e6b79bc-c9be-4a71-8258-4509f8de5fbf/collection/43899412-a5b87e98-199b-4bd7-8047-13cc80277943?action=share&source=collection_link&creator=43899412"
+	},
+	"item": [
+		{
+			"name": "Request at 10:00 on the 14th for product 35455 and brand 1 (ZARA)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product and brand are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.productId).to.eql(35455);\r",
+							"    pm.expect(jsonData.brandId).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price and date range are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(\"35.50 EUR\");\r",
+							"    pm.expect(jsonData.startDate).to.eql(\"2020-06-14T00:00:00Z\");\r",
+							"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59Z\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.productId).to.exist;\r",
+							"    pm.expect(responseData.brandId).to.exist;\r",
+							"    pm.expect(responseData.priceList).to.exist;\r",
+							"    pm.expect(responseData.startDate).to.exist;\r",
+							"    pm.expect(responseData.endDate).to.exist;\r",
+							"    pm.expect(responseData.price).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"ProductId and brandId are non-negative integers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.productId).to.be.a('number').and.to.be.at.least(0);\r",
+							"    pm.expect(responseData.brandId).to.be.a('number').and.to.be.at.least(0);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Start date and end date should be in valid date format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.startDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Start date should be in valid format\");\r",
+							"    pm.expect(responseData.endDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"End date should be in valid format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8001/prices?brandId=1&productId=35455&applicationDate=2020-06-14T10:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14T10:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request at 16:00 on the 14th for product 35455 and brand 1 (ZARA)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product and brand are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.productId).to.eql(35455);\r",
+							"    pm.expect(jsonData.brandId).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price and date range are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(\"25.45 EUR\");\r",
+							"    pm.expect(jsonData.startDate).to.eql(\"2020-06-14T15:00:00Z\");\r",
+							"    pm.expect(jsonData.endDate).to.eql(\"2020-06-14T18:30:00Z\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.productId).to.exist;\r",
+							"    pm.expect(responseData.brandId).to.exist;\r",
+							"    pm.expect(responseData.priceList).to.exist;\r",
+							"    pm.expect(responseData.startDate).to.exist;\r",
+							"    pm.expect(responseData.endDate).to.exist;\r",
+							"    pm.expect(responseData.price).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"ProductId and brandId are non-negative integers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.productId).to.be.a('number').and.to.be.at.least(0);\r",
+							"    pm.expect(responseData.brandId).to.be.a('number').and.to.be.at.least(0);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Start date and end date should be in valid date format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.startDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Start date should be in valid format\");\r",
+							"    pm.expect(responseData.endDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"End date should be in valid format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8001/prices?brandId=1&productId=35455&applicationDate=2020-06-14T16:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14T16:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request at 21:00 on the 14th for product 35455 and brand 1 (ZARA)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product and brand are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.productId).to.eql(35455);\r",
+							"    pm.expect(jsonData.brandId).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price and date range are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(\"35.50 EUR\");\r",
+							"    pm.expect(jsonData.startDate).to.eql(\"2020-06-14T00:00:00Z\");\r",
+							"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59Z\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.productId).to.exist;\r",
+							"    pm.expect(responseData.brandId).to.exist;\r",
+							"    pm.expect(responseData.priceList).to.exist;\r",
+							"    pm.expect(responseData.startDate).to.exist;\r",
+							"    pm.expect(responseData.endDate).to.exist;\r",
+							"    pm.expect(responseData.price).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"ProductId and brandId are non-negative integers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.productId).to.be.a('number').and.to.be.at.least(0);\r",
+							"    pm.expect(responseData.brandId).to.be.a('number').and.to.be.at.least(0);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Start date and end date should be in valid date format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.startDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Start date should be in valid format\");\r",
+							"    pm.expect(responseData.endDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"End date should be in valid format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8001/prices?brandId=1&productId=35455&applicationDate=2020-06-14T21:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "applicationDate",
+							"value": "2020-06-14T21:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request at 10:00 on the 15th for product 35455 and brand 1 (ZARA)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product and brand are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.productId).to.eql(35455);\r",
+							"    pm.expect(jsonData.brandId).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price and date range are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(\"30.50 EUR\");\r",
+							"    pm.expect(jsonData.startDate).to.eql(\"2020-06-15T00:00:00Z\");\r",
+							"    pm.expect(jsonData.endDate).to.eql(\"2020-06-15T11:00:00Z\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.productId).to.exist;\r",
+							"    pm.expect(responseData.brandId).to.exist;\r",
+							"    pm.expect(responseData.priceList).to.exist;\r",
+							"    pm.expect(responseData.startDate).to.exist;\r",
+							"    pm.expect(responseData.endDate).to.exist;\r",
+							"    pm.expect(responseData.price).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"ProductId and brandId are non-negative integers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.productId).to.be.a('number').and.to.be.at.least(0);\r",
+							"    pm.expect(responseData.brandId).to.be.a('number').and.to.be.at.least(0);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Start date and end date should be in valid date format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.startDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Start date should be in valid format\");\r",
+							"    pm.expect(responseData.endDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"End date should be in valid format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8001/prices?brandId=1&productId=35455&applicationDate=2020-06-15T10:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "applicationDate",
+							"value": "2020-06-15T10:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request at 21:00 on the 16th for product 35455 and brand 1 (ZARA)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product and brand are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.productId).to.eql(35455);\r",
+							"    pm.expect(jsonData.brandId).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price and date range are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(\"38.95 EUR\");\r",
+							"    pm.expect(jsonData.startDate).to.eql(\"2020-06-15T16:00:00Z\");\r",
+							"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59Z\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.productId).to.exist;\r",
+							"    pm.expect(responseData.brandId).to.exist;\r",
+							"    pm.expect(responseData.priceList).to.exist;\r",
+							"    pm.expect(responseData.startDate).to.exist;\r",
+							"    pm.expect(responseData.endDate).to.exist;\r",
+							"    pm.expect(responseData.price).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"ProductId and brandId are non-negative integers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.productId).to.be.a('number').and.to.be.at.least(0);\r",
+							"    pm.expect(responseData.brandId).to.be.a('number').and.to.be.at.least(0);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Start date and end date should be in valid date format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.startDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Start date should be in valid format\");\r",
+							"    pm.expect(responseData.endDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"End date should be in valid format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8001/prices?brandId=1&productId=35455&applicationDate=2020-06-16T21:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "applicationDate",
+							"value": "2020-06-16T21:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
