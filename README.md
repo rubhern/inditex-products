@@ -42,7 +42,7 @@ This project provides a REST API to retrieve applicable pricing information for 
 
 ```bash
 docker build -t prices-api .
-docker run -p 8080:8080 prices-api
+docker run -p 8001:8001 prices-api
 ```
 
 ---
