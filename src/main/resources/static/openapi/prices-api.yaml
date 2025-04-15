@@ -11,6 +11,8 @@ servers:
 paths:
   /prices:
     get:
+      tags:
+        - Prices
       summary: Get applicable price
       description: Returns the applicable price based on brand, product, and application date.
       operationId: getApplicablePrice
@@ -40,10 +42,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Bad request - invalid or missing parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: No applicable price found
-        '400':
-          description: Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
 components:
   schemas:
@@ -65,8 +81,23 @@ components:
           type: string
           format: date-time
         price:
-          type: number
-          format: decimal
-        currency:
           type: string
-          example: EUR
+          example: "25.45 EUR"
+    ErrorResponse:
+      type: object
+      required:
+        - timestamp
+        - status
+        - message
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        path:
+          type: string
+          description: Requested path (optional)
