@@ -46,12 +46,6 @@ docker run -p 8001:8001 prices-api
 
 ---
 
-## 🔍 API Endpoints
-
-| Resource           | URL                                      | Description                                  |
-|
-
----
 ## ⚙️ Database – H2 Configuration
 
 The application uses an **in-memory H2 database**, preconfigured for use during runtime and testing. You can access the H2 web console to inspect the data.
