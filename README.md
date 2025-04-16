@@ -1,4 +1,3 @@
-
 # Prices API
 
 This project provides a REST API to retrieve applicable pricing information for a given product, brand, and application date. It is developed using **Hexagonal Architecture**, following **Clean Architecture** principles, **CQRS pattern**, and an **API First** approach powered by OpenAPI and code generation.
@@ -44,6 +43,52 @@ This project provides a REST API to retrieve applicable pricing information for 
 docker build -t prices-api .
 docker run -p 8001:8001 prices-api
 ```
+
+---
+
+## 🔍 API Endpoints
+
+| Resource           | URL                                      | Description                                  |
+|
+
+---
+## ⚙️ Database – H2 Configuration
+
+The application uses an **in-memory H2 database**, preconfigured for use during runtime and testing. You can access the H2 web console to inspect the data.
+
+### 🔐 Connection parameters:
+
+- **URL**: `jdbc:h2:mem:pricesdb`
+- **Username**: `sa`
+- **Password**: *(empty)*
+- **Web Console**: [`http://localhost:8001/h2-console`](http://localhost:8001/h2-console)
+
+> Make sure to set the JDBC URL in the console to `jdbc:h2:mem:pricesdb` when connecting.
+
+---
+## 📑 Logging – Configuration and Output
+
+Logging is configured using a **logback.xml** file located at:
+
+```
+src/main/resources/logback-spring.xml
+```
+
+### 🗂️ Log output:
+
+- **Log directory**: Logs are written to the root directory under the `logs/` folder.
+- **Log filename**: `prices-api.log`
+- **Rotation policy**:
+  - One file per day
+  - Up to **7 days** of log history
+  - Older files are renamed with the date, e.g., `prices-api-2024-04-15.log`
+
+### ✨ Default log levels:
+
+- `INFO` for the application
+- `DEBUG` for internal packages (`com.inditex.prices`)
+
+> You can adjust log levels in the `logback-spring.xml` file depending on the environment.
 
 ---
 
