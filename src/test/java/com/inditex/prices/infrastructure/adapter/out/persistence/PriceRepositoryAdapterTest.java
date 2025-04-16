@@ -10,9 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,15 +35,14 @@ class PriceRepositoryAdapterTest {
         PriceEntity entity = mock(PriceEntity.class);
         Price price = mock(Price.class);
 
-        when(jpaRepository.findApplicablePrices(brandId, productId, date)).thenReturn(List.of(entity));
+        when(jpaRepository.findApplicablePrices(brandId, productId, date)).thenReturn(Optional.of(entity));
         when(mapper.toDomain(entity)).thenReturn(price);
 
         // When
-        List<Price> result = adapter.findApplicablePrices(1L, 35455L, date);
+        Optional<Price> result = adapter.findApplicablePrices(1L, 35455L, date);
 
         // Then
-        assertEquals(1, result.size());
-        assertEquals(price, result.getFirst());
+        assertFalse(result.isEmpty());
 
         verify(jpaRepository).findApplicablePrices(brandId, productId, date);
         verify(mapper).toDomain(entity);

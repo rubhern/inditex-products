@@ -12,7 +12,7 @@
 
     <groupId>com.inditex</groupId>
     <artifactId>prices</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>prices</name>
     <description>Manage information about prices</description>
 

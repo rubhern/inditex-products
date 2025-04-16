@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -18,9 +17,8 @@ public class PriceRepositoryAdapter implements PriceQueryRepository {
     private final PricePersistenceMapper mapper;
 
     @Override
-    public List<Price> findApplicablePrices(Long brandId, Long productId, LocalDateTime dateTime) {
-        return jpaRepository.findApplicablePrices(brandId, productId, dateTime).stream()
-                .map(mapper::toDomain)
-                .collect(Collectors.toList());
+    public Optional<Price> findApplicablePrices(Long brandId, Long productId, LocalDateTime dateTime) {
+        return jpaRepository.findApplicablePrices(brandId, productId, dateTime)
+                .map(mapper::toDomain);
     }
 }
